@@ -2,12 +2,12 @@ using MediatR;
 using ToDoList.Core.Common;
 using ToDoList.Core.Domain.Tasks.Common;
 using ToDoList.Core.Domain.Tasks.Data;
-using Task = ToDoList.Core.Domain.Timers.Models.Task;
+using Task = ToDoList.Core.Domain.Tasks.Models.Task;
 
 namespace ToDoList.Application.Domain.Tasks.Commands.CreateTask;
 
 public class CreateTaskCommandHandler(
-    ITasksRepository tasksRepository, 
+    ITasksRepository tasksRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<CreateTaskCommand, Guid>
 {
     public async Task<Guid> Handle(CreateTaskCommand command, CancellationToken cancellationToken)

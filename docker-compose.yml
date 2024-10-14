@@ -1,0 +1,7 @@
+services:
+  todolist.api:
+    image: ${DOCKER_REGISTRY-}todolistapi
+    build:
+      context: .
+      dockerfile: src/ToDoList.Api/Dockerfile
+
