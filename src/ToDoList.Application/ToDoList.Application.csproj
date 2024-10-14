@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain\Users\Commands\CreateUser\" />
+      <Folder Include="Domain\Users\Commands\DeleteUser\" />
+      <Folder Include="Domain\Users\Commands\UpdateUser\" />
+      <Folder Include="Domain\Users\Queries\GetUserDetails\" />
+      <Folder Include="Domain\Users\Queries\GetUsers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ToDoList.Core\ToDoList.Core.csproj" />
+    </ItemGroup>
+
+</Project>
