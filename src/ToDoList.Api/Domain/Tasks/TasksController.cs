@@ -68,7 +68,7 @@ public class TasksController(IMediator mediator, ITasksRepository tasksRepositor
         // this should be done in the authorization handler
         var task = await tasksRepository.FindAsync(id, cancellationToken);
         
-        if(task.UserId != userId && task.SharedWithUsers.All(x => x.Id != userId))
+        if(task.UserId != userId && task.SharedWithUsers.All(x => x.UserId != userId))
         {
             return NotFound();
         }

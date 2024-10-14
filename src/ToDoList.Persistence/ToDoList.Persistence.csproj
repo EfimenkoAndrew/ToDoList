@@ -6,4 +6,17 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ToDoListDb\EntityConfigurations\Users\" />
+      <Folder Include="ToDoListDb\Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ToDoList.Core\ToDoList.Core.csproj" />
+    </ItemGroup>
+
 </Project>

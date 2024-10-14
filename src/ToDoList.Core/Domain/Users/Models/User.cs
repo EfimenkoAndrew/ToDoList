@@ -1,6 +1,8 @@
+using ToDoList.Core.Common;
+
 namespace ToDoList.Core.Domain.Users.Models;
 
-public class User
+public class User : Entity, IAggregateRoot
 {
     public Guid Id { get; private set; }
     
