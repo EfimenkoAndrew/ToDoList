@@ -8,8 +8,11 @@ public class DeleteTaskCommandHandler(ITasksRepository tasksRepository, IUnitOfW
 {
     public async Task Handle(DeleteTaskCommand command, CancellationToken cancellationToken)
     {
-        var task = await tasksRepository.FindAsync(command.Id, cancellationToken);
-        tasksRepository.Delete(task);
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+        var task = await tasksRepository.FindOrDefaultAsync(command.Id, cancellationToken);
+        if(task is not null)
+        {
+            tasksRepository.Delete(task);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
+        }
     }
 }

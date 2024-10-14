@@ -1,27 +1,40 @@
+using Microsoft.EntityFrameworkCore;
 using ToDoList.Core.Domain.Tasks.Common;
+using ToDoList.Core.Exceptions;
+using ToDoList.Persistence.ToDoListDb;
 using Task = ToDoList.Core.Domain.Timers.Models.Task;
 
 namespace ToDoList.Infrastructure.Domain.Tasks;
 
-public class TasksRepository : ITasksRepository
+public class TasksRepository(ToDoListDbContext dbContext) : ITasksRepository
 {
-    public Task<Task> FindAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Task> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext
+            .Tasks
+            .Include(x=>x.User)
+            .Include(x=>x.SharedWithUsers)
+            .ThenInclude(x=>x.User)
+            .Include(x=>x.SharedWithUsers)
+            .ThenInclude(x=>x.Task)
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
+            ?? throw new NotFoundException($"{nameof(Task)} with id: '{id}' was not found.");
     }
 
-    public Task<Task?> FindOrDefaultAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Task?> FindOrDefaultAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await dbContext
+            .Tasks
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public void Add(Task task)
     {
-        throw new NotImplementedException();
+        dbContext.Tasks.Add(task);
     }
 
     public void Delete(Task task)
     {
-        throw new NotImplementedException();
+        dbContext.Tasks.Remove(task);
     }
 }

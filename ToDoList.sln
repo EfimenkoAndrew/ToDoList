@@ -1,16 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api", "src\ToDoList.Api\ToDoList.Api.csproj", "{8DBA9110-1F5B-4892-89C0-3CAAB8481C3B}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Api", "src\ToDoList.Api\ToDoList.Api.csproj", "{8DBA9110-1F5B-4892-89C0-3CAAB8481C3B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6F0FB7CE-5E05-4960-B1C8-91C678014495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "src\ToDoList.Application\ToDoList.Application.csproj", "{59399856-72DA-4301-AC6A-A692719820BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Application", "src\ToDoList.Application\ToDoList.Application.csproj", "{59399856-72DA-4301-AC6A-A692719820BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Core", "src\ToDoList.Core\ToDoList.Core.csproj", "{B30D524D-63DD-4AC3-ADB7-4AF5BDB0031E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Core", "src\ToDoList.Core\ToDoList.Core.csproj", "{B30D524D-63DD-4AC3-ADB7-4AF5BDB0031E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Infrastructure", "src\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{CD62A8F4-5F12-4189-8276-7B9C26274393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Infrastructure", "src\ToDoList.Infrastructure\ToDoList.Infrastructure.csproj", "{CD62A8F4-5F12-4189-8276-7B9C26274393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Persistence", "src\ToDoList.Persistence\ToDoList.Persistence.csproj", "{02CACAF4-8A6C-42FE-BF7D-10BF113FB0A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Persistence", "src\ToDoList.Persistence\ToDoList.Persistence.csproj", "{02CACAF4-8A6C-42FE-BF7D-10BF113FB0A4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{841ABC6C-5E48-4FF0-9D49-9885C6CB7633}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +43,13 @@ Global
 		{02CACAF4-8A6C-42FE-BF7D-10BF113FB0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02CACAF4-8A6C-42FE-BF7D-10BF113FB0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02CACAF4-8A6C-42FE-BF7D-10BF113FB0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841ABC6C-5E48-4FF0-9D49-9885C6CB7633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841ABC6C-5E48-4FF0-9D49-9885C6CB7633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841ABC6C-5E48-4FF0-9D49-9885C6CB7633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841ABC6C-5E48-4FF0-9D49-9885C6CB7633}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8DBA9110-1F5B-4892-89C0-3CAAB8481C3B} = {6F0FB7CE-5E05-4960-B1C8-91C678014495}
