@@ -13,7 +13,10 @@ public class ValidationException : DomainException
     // todo: think how to change ValidationFailure and do we need to do it
     public ValidationException(ValidationFailure failure) : base("Validation is failed.")
     {
-        Failures = new[] { failure };
+        Failures = new[]
+        {
+            failure
+        };
     }
 
     public IReadOnlyCollection<ValidationFailure> Failures { get; }

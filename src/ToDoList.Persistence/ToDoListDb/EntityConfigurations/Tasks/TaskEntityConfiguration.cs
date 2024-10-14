@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Task = ToDoList.Core.Domain.Timers.Models.Task;
+using Task = ToDoList.Core.Domain.Tasks.Models.Task;
 
 namespace ToDoList.Persistence.ToDoListDb.EntityConfigurations.Tasks;
 
@@ -32,7 +32,7 @@ public class TaskEntityConfiguration : IEntityTypeConfiguration<Task>
             .Metadata
             .FindNavigation(nameof(Task.SharedWithUsers))!
             .SetPropertyAccessMode(PropertyAccessMode.Field);
-        
+
         builder
             .HasMany(x => x.SharedWithUsers)
             .WithOne(x => x.Task)

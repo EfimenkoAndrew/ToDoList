@@ -11,8 +11,8 @@ public class UsersRepository(ToDoListDbContext dbContext) : IUsersRepository
     public async Task<User> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await dbContext
-            .Users
-            .FirstOrDefaultAsync(x=> x.Id == id, cancellationToken)
+                .Users
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
             ?? throw new NotFoundException($"{nameof(User)} with id: '{id}' was not found.");
     }
 

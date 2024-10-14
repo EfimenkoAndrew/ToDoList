@@ -19,7 +19,8 @@ public abstract class Entity
         ThrowIfNotValid(validationResult);
     }
 
-    protected static async Task ValidateAsync<T>(AbstractValidator<T> validator, T data,
+    protected static async Task ValidateAsync<T>(AbstractValidator<T> validator,
+        T data,
         CancellationToken cancellationToken = default)
     {
         var validationResult = await validator.ValidateAsync(data, cancellationToken);

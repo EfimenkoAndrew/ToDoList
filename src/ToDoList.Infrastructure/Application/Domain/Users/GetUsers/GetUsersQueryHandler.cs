@@ -13,11 +13,11 @@ public class GetUsersQueryHandler(ToDoListDbContext dbContext) : IRequestHandler
         var sqlQuery = dbContext
             .Users
             .AsNoTracking();
-        
+
         var take = query.PageSize;
         var skip = (query.PageNumber - 1) * query.PageSize;
         var total = await sqlQuery.CountAsync(cancellationToken);
-        
+
         var users = await sqlQuery
             .Select(x => new UserDto
             {
@@ -28,7 +28,7 @@ public class GetUsersQueryHandler(ToDoListDbContext dbContext) : IRequestHandler
             .Skip(skip)
             .Take(take)
             .ToArrayAsync(cancellationToken);
-        
+
         return new PageResponse<UserDto[]>(total, users);
     }
 }

@@ -13,10 +13,10 @@ public class GetTasksQueryHandler(ToDoListDbContext dbContext) : IRequestHandler
         var sqlQuery = dbContext.Tasks
             .AsNoTracking()
             .Where(x => x.UserId == query.UserId || x.SharedWithUsers.Any(u => u.UserId == query.UserId));
-        
+
         var total = await sqlQuery.CountAsync(cancellationToken);
         var skip = (query.PageNumber - 1) * query.PageSize;
-        
+
         var tasks = await sqlQuery
             .OrderBy(x => x.Title)
             .ThenBy(x => x.CreatedAt)
@@ -30,7 +30,7 @@ public class GetTasksQueryHandler(ToDoListDbContext dbContext) : IRequestHandler
                 CreatedAt = x.CreatedAt,
             })
             .ToArrayAsync(cancellationToken);
-        
+
         return new PageResponse<TaskDto[]>(total, tasks);
     }
 }

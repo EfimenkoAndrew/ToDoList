@@ -36,7 +36,7 @@ public class TasksController(IMediator mediator, ITasksRepository tasksRepositor
     [ProducesResponseType(typeof(TaskDetailsDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDetailsDto>> GetTask(
-        [FromHeader][Required] Guid userId, 
+        [FromHeader][Required] Guid userId,
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
@@ -48,56 +48,56 @@ public class TasksController(IMediator mediator, ITasksRepository tasksRepositor
     [HttpPost]
     [ProducesResponseType(typeof(CreatedResponse<Guid>), StatusCodes.Status201Created)]
     public async Task<ActionResult<TaskDto>> CreateTask(
-        [FromHeader][Required] Guid userId, 
-        [FromBody] [Required] CreateTaskRequest request,
+        [FromHeader][Required] Guid userId,
+        [FromBody][Required] CreateTaskRequest request,
         CancellationToken cancellationToken)
     {
         var command = new CreateTaskCommand(userId, request.Title, request.Description, request.DueDate);
         var taskId = await mediator.Send(command, cancellationToken);
         return Created(taskId);
     }
-    
+
     [HttpPost("{id}/share")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> ShareTask(
-        [FromHeader][Required] Guid userId, 
+        [FromHeader][Required] Guid userId,
         [FromRoute] Guid id,
-        [FromBody] [Required] ShareTaskRequest request,
+        [FromBody][Required] ShareTaskRequest request,
         CancellationToken cancellationToken)
     {
         // this is the worst way to check if the user has access to the task
         // this should be done in the authorization handler
         var task = await tasksRepository.FindAsync(id, cancellationToken);
-        
-        if(task.UserId != userId && task.SharedWithUsers.All(x => x.UserId != userId))
+
+        if (task.UserId != userId && task.SharedWithUsers.All(x => x.UserId != userId))
         {
             return NotFound();
         }
-        
+
         var command = new ShareTaskCommand(id, request.UserId);
         await mediator.Send(command, cancellationToken);
         return Ok();
     }
-    
+
     [HttpPost("{id}/unshare")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> UnshareTask(
-        [FromHeader][Required] Guid userId, 
+        [FromHeader][Required] Guid userId,
         [FromRoute] Guid id,
-        [FromBody] [Required] ShareTaskRequest request,
+        [FromBody][Required] ShareTaskRequest request,
         CancellationToken cancellationToken)
     {
         // this is the worst way to check if the user has access to the task
         // this should be done in the authorization handler
         var task = await tasksRepository.FindAsync(id, cancellationToken);
-        
-        if(task.UserId != userId)
+
+        if (task.UserId != userId)
         {
             return NotFound();
         }
-        
+
         var command = new UnshareTaskCommand(id, request.UserId);
         await mediator.Send(command, cancellationToken);
         return Ok();
@@ -107,20 +107,20 @@ public class TasksController(IMediator mediator, ITasksRepository tasksRepositor
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TaskDto>> UpdateTask(
-        [FromHeader] [Required] Guid userId, 
-        [FromRoute] Guid id, 
-        [FromBody] [Required] UpdateTaskRequest request,
+        [FromHeader][Required] Guid userId,
+        [FromRoute] Guid id,
+        [FromBody][Required] UpdateTaskRequest request,
         CancellationToken cancellationToken)
     {
         // this is the worst way to check if the user has access to the task
         // this should be done in the authorization handler
         var task = await tasksRepository.FindAsync(id, cancellationToken);
-        
-        if(task.UserId != userId && task.SharedWithUsers.All(x => x.UserId != userId))
+
+        if (task.UserId != userId && task.SharedWithUsers.All(x => x.UserId != userId))
         {
             return NotFound();
         }
-        
+
         var command = new UpdateTaskCommand(id, userId, request.Title, request.Description);
         await mediator.Send(command, cancellationToken);
         return Ok();
@@ -129,19 +129,19 @@ public class TasksController(IMediator mediator, ITasksRepository tasksRepositor
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> DeleteTask(
-        [FromHeader][Required] Guid userId, 
+        [FromHeader][Required] Guid userId,
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
         // this is the worst way to check if the user has access to the task
         // this should be done in the authorization handler
         var task = await tasksRepository.FindAsync(id, cancellationToken);
-        
-        if(task.UserId != userId)
+
+        if (task.UserId != userId)
         {
             return NotFound();
         }
-        
+
         var command = new DeleteTaskCommand(id, userId);
         await mediator.Send(command, cancellationToken);
         return Ok();

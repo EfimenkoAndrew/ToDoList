@@ -1,3 +1,3 @@
-namespace ToDoList.Api.Domain.Tasks;
+namespace ToDoList.Api.Domain.Tasks.Requests;
 
 public record ShareTaskRequest(Guid UserId);

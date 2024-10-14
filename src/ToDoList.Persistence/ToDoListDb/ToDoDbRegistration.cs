@@ -7,12 +7,12 @@ namespace ToDoList.Persistence.ToDoListDb;
 public static class ToDoDbRegistration
 {
     private const string ConnectionStringName = "ToDoListDb";
-    
-    public static void  AddToDoListDb(this IServiceCollection services, IConfiguration configuration)
+
+    public static void AddToDoListDb(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString(ConnectionStringName)
-                               ?? throw new AggregateException(
-                                   $"Connection string: '{ConnectionStringName}' is not found in configurations.");
+            ?? throw new AggregateException(
+                $"Connection string: '{ConnectionStringName}' is not found in configurations.");
 
 
         services.AddDbContext<ToDoListDbContext>(options =>

@@ -11,8 +11,8 @@ public class CreateUserCommandHandler(IUsersRepository usersRepository, IUnitOfW
     public async Task<Guid> Handle(CreateUserCommand command, CancellationToken cancellationToken)
     {
         var data = new CreateUserData(
-            command.FirstName, 
-            command.LastName, 
+            command.FirstName,
+            command.LastName,
             command.Email);
         var user = User.Create(data);
         usersRepository.Add(user);

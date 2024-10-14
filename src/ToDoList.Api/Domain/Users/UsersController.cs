@@ -37,14 +37,14 @@ public class UsersController(IMediator mediator) : ApiControllerBase
         CancellationToken cancellationToken)
     {
         var query = new GetUserDetailsQuery(id);
-        var User = await mediator.Send(query, cancellationToken);
-        return Ok(User);
+        var user = await mediator.Send(query, cancellationToken);
+        return Ok(user);
     }
 
     [HttpPost]
     [ProducesResponseType(typeof(CreatedResponse<Guid>), StatusCodes.Status201Created)]
     public async Task<ActionResult> CreateTask(
-        [FromBody] [Required] CreateUserRequest request,
+        [FromBody][Required] CreateUserRequest request,
         CancellationToken cancellationToken)
     {
         var command = new CreateUserCommand(request.FirstName, request.LastName, request.Email);
@@ -56,8 +56,8 @@ public class UsersController(IMediator mediator) : ApiControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> UpdateTask(
-        [FromRoute] Guid id, 
-        [FromBody] [Required] UpdateUserRequest request,
+        [FromRoute] Guid id,
+        [FromBody][Required] UpdateUserRequest request,
         CancellationToken cancellationToken)
     {
         var command = new UpdateUserCommand(id, request.FirstName, request.LastName, request.Email);

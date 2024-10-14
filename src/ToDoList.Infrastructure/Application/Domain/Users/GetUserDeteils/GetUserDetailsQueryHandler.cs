@@ -12,16 +12,16 @@ public class GetUserDetailsQueryHandler(ToDoListDbContext dbContext) : IRequestH
     public async Task<UserDetailsDto> Handle(GetUserDetailsQuery query, CancellationToken cancellationToken)
     {
         return await dbContext
-            .Users
-            .AsNoTracking()
-            .Select(x => new UserDetailsDto
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Email = x.Email
-            })
-            .FirstOrDefaultAsync(x => x.Id == query.Id, cancellationToken)
+                .Users
+                .AsNoTracking()
+                .Select(x => new UserDetailsDto
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email
+                })
+                .FirstOrDefaultAsync(x => x.Id == query.Id, cancellationToken)
             ?? throw new NotFoundException($"{nameof(User)} with id: '{query.Id}' was not found.");
     }
 }

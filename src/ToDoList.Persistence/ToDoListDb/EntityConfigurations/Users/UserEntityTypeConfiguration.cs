@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ToDoList.Core.Domain.Timers.Models;
+using ToDoList.Core.Domain.Tasks.Models;
 using ToDoList.Core.Domain.Users.Models;
 
 namespace ToDoList.Persistence.ToDoListDb.EntityConfigurations.Users;
@@ -22,10 +22,10 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder
             .Property(x => x.Email)
             .HasMaxLength(250);
-        
+
         builder
             .HasMany<TaskUser>()
-            .WithOne(x=> x.User)
+            .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);

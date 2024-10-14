@@ -27,6 +27,9 @@ public class ExceptionHandlerDeveloperMiddleware(
         context.Response.StatusCode = (int)exceptionResponse.StatusCode;
         context.Response.ContentType = "application/json";
         await JsonSerializer.SerializeAsync(context.Response.Body, exceptionResponse.Data,
-            new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
     }
 }
