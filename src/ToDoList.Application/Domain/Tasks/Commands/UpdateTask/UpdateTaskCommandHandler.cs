@@ -12,8 +12,7 @@ public class UpdateTaskCommandHandler(ITasksRepository tasksRepository, IUnitOfW
         var task = await tasksRepository.FindAsync(command.Id, cancellationToken);
         var data = new UpdateTaskData(
             command.Title,
-            command.Description,
-            command.DueDate);
+            command.Description);
         task.Update(data);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }

@@ -8,7 +8,5 @@ public record TaskDto
     
     public string Description { get; init; }
     
-    public DateTime DueDate { get; init; }
-    
-    public bool IsCompleted { get; init; }
+    public DateTime CreatedAt { get; init; }
 }

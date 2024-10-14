@@ -1,6 +1,6 @@
 namespace ToDoList.Application.Domain.Users.Queries.GetUserDetails;
 
-public record UserDetailDto
+public record UserDetailsDto
 {
     public Guid Id { get; init; }
     

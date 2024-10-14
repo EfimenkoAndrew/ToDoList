@@ -3,13 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Api.Common;
 using ToDoList.Api.Constants;
-using ToDoList.Api.Domain.Tasks.Requests;
 using ToDoList.Api.Domain.Users.Requests;
 using ToDoList.Application.Common;
-using ToDoList.Application.Domain.Tasks.Commands.CreateTask;
-using ToDoList.Application.Domain.Tasks.Commands.DeleteTask;
-using ToDoList.Application.Domain.Tasks.Commands.UpdateTask;
-using ToDoList.Application.Domain.Tasks.Queries.GetTaskDetails;
 using ToDoList.Application.Domain.Tasks.Queries.GetTasks;
 using ToDoList.Application.Domain.Users.Commands.CreateUser;
 using ToDoList.Application.Domain.Users.Commands.DeleteUser;
@@ -35,20 +30,20 @@ public class UsersController(IMediator mediator) : ApiControllerBase
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(TaskDetailsDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UserDetailsDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<TaskDetailsDto>> GetTask(
+    public async Task<ActionResult<UserDetailsDto>> GetTask(
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
         var query = new GetUserDetailsQuery(id);
-        var task = await mediator.Send(query, cancellationToken);
-        return Ok(task);
+        var User = await mediator.Send(query, cancellationToken);
+        return Ok(User);
     }
 
     [HttpPost]
     [ProducesResponseType(typeof(CreatedResponse<Guid>), StatusCodes.Status201Created)]
-    public async Task<ActionResult<TaskDto>> CreateTask(
+    public async Task<ActionResult> CreateTask(
         [FromBody] [Required] CreateUserRequest request,
         CancellationToken cancellationToken)
     {
@@ -60,7 +55,7 @@ public class UsersController(IMediator mediator) : ApiControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<TaskDto>> UpdateTask(
+    public async Task<ActionResult> UpdateTask(
         [FromRoute] Guid id, 
         [FromBody] [Required] UpdateUserRequest request,
         CancellationToken cancellationToken)

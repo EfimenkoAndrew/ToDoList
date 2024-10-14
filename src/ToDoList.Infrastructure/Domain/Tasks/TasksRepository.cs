@@ -14,9 +14,6 @@ public class TasksRepository(ToDoListDbContext dbContext) : ITasksRepository
             .Tasks
             .Include(x=>x.User)
             .Include(x=>x.SharedWithUsers)
-            .ThenInclude(x=>x.User)
-            .Include(x=>x.SharedWithUsers)
-            .ThenInclude(x=>x.Task)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken)
             ?? throw new NotFoundException($"{nameof(Task)} with id: '{id}' was not found.");
     }

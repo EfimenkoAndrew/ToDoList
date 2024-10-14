@@ -7,14 +7,14 @@ using ToDoList.Persistence.ToDoListDb;
 
 namespace ToDoList.Infrastructure.Application.Domain.Users.GetUserDeteils;
 
-public class GetUserDetailsQueryHandler(ToDoListDbContext dbContext) : IRequestHandler<GetUserDetailsQuery, UserDetailDto>
+public class GetUserDetailsQueryHandler(ToDoListDbContext dbContext) : IRequestHandler<GetUserDetailsQuery, UserDetailsDto>
 {
-    public async Task<UserDetailDto> Handle(GetUserDetailsQuery query, CancellationToken cancellationToken)
+    public async Task<UserDetailsDto> Handle(GetUserDetailsQuery query, CancellationToken cancellationToken)
     {
         return await dbContext
             .Users
             .AsNoTracking()
-            .Select(x => new UserDetailDto
+            .Select(x => new UserDetailsDto
             {
                 Id = x.Id,
                 FirstName = x.FirstName,

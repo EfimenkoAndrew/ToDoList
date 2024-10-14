@@ -11,7 +11,7 @@ public class Task : Entity, IAggregateRoot
     {
     }
     
-    private List<TaskUser> _users = new();
+    private List<TaskUser> _sharedWithUsers = new();
     
     public Guid Id { get; private set; }
     
@@ -25,7 +25,7 @@ public class Task : Entity, IAggregateRoot
     
     public User User { get; private set; }
     
-    public IReadOnlyCollection<TaskUser> SharedWithUsers => _users.AsReadOnly();
+    public IReadOnlyCollection<TaskUser> SharedWithUsers => _sharedWithUsers.AsReadOnly();
     
     private Task(Guid id, string title, string description, Guid userId)
     {
@@ -41,17 +41,30 @@ public class Task : Entity, IAggregateRoot
         return new(Guid.NewGuid(), data.Title, data.Description, data.UserId);
     }
     
-    public void ShareWithUser(User user)
+    public void ShareWithUser(Guid userId)
     {
+        if (_sharedWithUsers.Any(x => x.UserId == userId))
+        {
+            return;
+        }
         
+        _sharedWithUsers.Add(TaskUser.Create(userId, Id));
     }
     
-    public void UnshareWithUser(User user)
+    public void UnshareWithUser(Guid userId)
     {
+        var user = _sharedWithUsers.SingleOrDefault(x => x.UserId == userId);
+        if (user is null)
+        {
+            return;
+        }
+        
+        _sharedWithUsers.Remove(user);
     }
 
     public void Update(UpdateTaskData data)
     {
-        
+        Title = data.Title;
+        Description = data.Description;
     }
 }
